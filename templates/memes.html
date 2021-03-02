@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block content %}
+<script>
+    console.log(meme_page)
+</script>
+<br><br>
+{% for meme in memes %}
+<div class="card" >
+    <div class="card-body">
+        <h5 class="card-title">{{ meme.name }}</h5>
+        <img src="{{ meme.url }}" alt="{{ meme.name }}">
+    </div>
+</div>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if memes.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ memes.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ memes.number }} of {{ memes.paginator.num_pages }}.
+        </span>
+
+        {% if memes.has_next %}
+            <a href="?page={{ memes.next_page_number }}">next</a>
+            <a href="?page={{ memes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<div class="alert alert-success notification" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {% if messages %}
+<ul>
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+{% endblock %}

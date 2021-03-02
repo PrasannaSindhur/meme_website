@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block content %}
+{% if alert_flag == 'danger' %}
+<body>
+<div class="container">
+    <div class="alert alert-danger alert-dismissible" style="margin:auto;margin-top:200px;width:400px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> <p>{{ message }}</p>
+    </div>
+</div>
+{% endif %}
+{% if alert_flag == 'success' %}
+<div class="container">
+    <div class="alert alert-success alert-dismissible" style="margin:auto;margin-top:200px;width:400px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> <p>{{ message }}</p>
+    </div>
+</div>
+{% endif %}
+{% if alert_flag == 'info' %}
+<div class="container">
+    <div class="alert alert-info alert-dismissible" style="margin:auto;margin-top:200px;width:400px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Info</strong><p>{{ message }}</p>
+    </div>
+</div>
+{% endif %}
+{% if alert_flag == 'loggedout' %}
+<div class="container">
+    <div class="alert alert-info alert-dismissible" style="margin:auto;margin-top:200px;width:400px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Info : </strong><p>{{ message }}</p>
+    </div>
+</div>
+{% endif %}
+</body>
+{% endblock %}
