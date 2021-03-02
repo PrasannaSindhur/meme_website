@@ -38,23 +38,3 @@ class UserDetailsForm(forms.ModelForm):
         return data
 
 
-class QuestionForm(forms.Form):
-    number = forms.IntegerField(min_value=1, max_value=50)
-    question = forms.CharField(max_length=300)
-    options = forms.MultipleChoiceField()
-    answer = forms.IntegerField(min_value=1, max_value=4)
-    explanation = forms.CharField(max_length=500)
-
-    def __init__(self, number, question, option1, option2, option3, option4, answer, explanation, *args, **kwargs):
-        self.number = number
-        self.question = question
-        options_list = (
-            ('a', option1),
-            ('b', option2),
-            ('c', option3),
-            ('d', option4)
-        )
-        self.options = forms.MultipleChoiceField(choices=options_list)
-        self.answer = answer
-        self.explanation = explanation
-        super(QuestionForm, self).__init__(*args, **kwargs)

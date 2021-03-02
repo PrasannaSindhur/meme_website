@@ -1,18 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
-from user_navigation.forms import UserDetailsForm, QuestionForm
-from .models import TestList
+from user_navigation.forms import UserDetailsForm
 from .library import *
 from django.contrib.auth.decorators import login_required
 import requests
-from my_website.settings import BASE_DIR, STATICFILES_DIRS
-import pandas as pd
 
 
 def index(request):
     isValidUser, username = authenticate_user(request)
     if isValidUser:
+        request.session['username'] = username
         return render(request, 'cookie_popup.html', {'logged_in': True})
     return render(request, 'index.html')
 
@@ -52,6 +50,7 @@ def complete_registration(request):
 
 @login_required
 def display_meme(request):
+    update_consent(request.session['username'])
     api_data = requests.get('https://api.imgflip.com/get_memes')
     if api_data.status_code == 200:
         memes_list = api_data.json().get("data").get("memes")
@@ -74,4 +73,10 @@ def logout(request, username, flag):
         message = "Sorry %s, Couldn't display memes since cookies were not accepted" %(username)
         alert = {'alert_flag': "danger", 'message': message}
     return render(request, 'msg_box.html', alert)
+
+
+def update_consent(username):
+    user_details = UserDetails.objects.filter(first_name=username)
+    user_details.consent = 1
+    username.save()
 

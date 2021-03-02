@@ -7,12 +7,7 @@ class UserDetails(models.Model):
     email_id = models.EmailField(max_length=30, unique=True)
     password = models.CharField(max_length=20)
     confirm_password = models.CharField(max_length=20)
-
-
-class TestList(models.Model):
-    title = models.CharField(max_length=30)
-    description = models.CharField(max_length=50)
-    filename = models.CharField(max_length=50)
+    consent = models.IntegerField()
 
 
 
