@@ -7,7 +7,7 @@ class UserDetails(models.Model):
     email_id = models.EmailField(max_length=30, unique=True)
     password = models.CharField(max_length=20)
     confirm_password = models.CharField(max_length=20)
-    consent = models.IntegerField()
+    consent = models.IntegerField(default=0)
 
 
 

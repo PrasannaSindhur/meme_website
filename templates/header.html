@@ -19,7 +19,14 @@
         </ul>
         <form class="form-inline mt-2 mt-md-0" method="get" action="{% url 'login' %}">
             {% if logged_in %}
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >{{ request.session.username }}</button>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>&nbspWelcome-{{request.session.username}}</a>
+                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                        <li><a class="last-login">Last login:{{request.session.time}}</a>
+                        <li><a class="dropdown-item btn" data-toggle="modal" href="#myModal">Change password</a>
+                        <li><a class="dropdown-item" href="{% url 'logout' request.session.username 1 %}">Logout</a>
+                    </ul>
+                </li>
             {% else %}
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Login/Sign Up</button>
             {% endif %}
