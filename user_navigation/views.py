@@ -62,6 +62,7 @@ def display_meme(request):
     if page_number is None:
         page_number = 1
     meme_page = memes_paginator.get_page(int(page_number))
+    request.COOKIES['last_visit'] = time.time()
     messages.info(request, "Cookie : %s" % (request.COOKIES['last_visit']))
     return render(request, 'memes.html', {'logged_in': True, 'memes': meme_page})
 
