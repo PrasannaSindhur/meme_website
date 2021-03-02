@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from user_navigation.forms import UserDetailsForm, QuestionForm
 from .models import TestList
 from .library import *
+from django.contrib.auth.decorators import login_required
 import requests
 from my_website.settings import BASE_DIR, STATICFILES_DIRS
 import pandas as pd
@@ -49,11 +50,11 @@ def complete_registration(request):
     return render(request, 'register.html', {'form': user_details_form})
 
 
+@login_required
 def display_meme(request):
     api_data = requests.get('https://api.imgflip.com/get_memes')
     if api_data.status_code == 200:
         memes_list = api_data.json().get("data").get("memes")
-    print(memes_list)
     memes_paginator = Paginator(memes_list, 5)
 
     page_number = request.GET.get('page')

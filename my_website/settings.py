@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'user_navigation.middleware.SessionMiddleware'
+    'user_navigation.middleware.SessionMiddleware'
 ]
 
 ROOT_URLCONF = 'my_website.urls'
@@ -136,3 +136,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 1 * 60
 SESSION_IDLE_TIMEOUT = 30
+
+LOGIN_URL = 'login'
